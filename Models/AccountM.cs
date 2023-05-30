@@ -10,28 +10,26 @@ namespace Anime_Web.Models
     {
         [Key, Column(Order = 1)]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int id { get; set; }
 
-        [Required(ErrorMessage = "Họ và Tên không hợp lệ")]
+        [Required(ErrorMessage = "Username is required.")]
         [StringLength(50, MinimumLength = 3)]
-        public string Fullname_user { get; set; }
+        public string username { get; set; }
 
-        [Required(ErrorMessage = "Tên tài khoản không hợp lệ")]
-        [StringLength(50, MinimumLength = 3)]
-        public string User_name { get; set; }
+        [Required(ErrorMessage = "Email is required.")]
+        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.)|(([\w-]+\.)+))(a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
+                            ErrorMessage = "Please enter valid email.")]
+        public string email { get; set; }
 
-        [Required(ErrorMessage = "Số điện thoại không hợp lệ không hợp lệ")]
-        [RegularExpression(@"^\+*\d{10,15}$")]
-        public string Phone { get; set; }
-
-        [Required(ErrorMessage = "Mật khẩu phải trên 6 ký tự")]
-        //[RegularExpression(@"^{6,15}$")]
-        [StringLength(50, MinimumLength = 6)]
-        public string Password { get; set; }
+        [Required(ErrorMessage = "Password is required.")]
+        [DataType(DataType.Password)]
+        [StringLength(50, MinimumLength = 6, ErrorMessage = "Password must be more than 6 characters.")]
+        public string password { get; set; }
 
         [NotMapped]
-        [Required(ErrorMessage = "Mật khẩu không khớp")]
-        [Compare("Password")]
-        public string F_Password { get; set; }
+        [Required(ErrorMessage = "Password incorrect.")]
+        [Compare("Password", ErrorMessage = "Please confirm your password!")]
+        [DataType(DataType.Password)]
+        public string cf_password { get; set; }
     }
 }

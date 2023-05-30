@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WEB_Anime_ASPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WEB_Anime_ASPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -230,7 +230,8 @@
             <End Role="trailer" EntitySet="trailer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WEB_Anime_ASPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -371,7 +372,7 @@
           <End Role="Anime" Type="Self.Anime" Multiplicity="*" />
           <End Role="studio" Type="Self.studio" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="WEB_Anime_ASPEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WEB_Anime_ASPEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Animes" EntityType="Self.Anime" />
           <EntitySet Name="Anime_episode" EntityType="Self.Anime_episode" />
@@ -410,7 +411,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WEB_Anime_ASPModelStoreContainer" CdmEntityContainer="WEB_Anime_ASPEntities">
+        <EntityContainerMapping StorageEntityContainer="WEB_Anime_ASPModelStoreContainer" CdmEntityContainer="WEB_Anime_ASPEntities1">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="WEB_Anime_ASPModel.Account">
               <MappingFragment StoreEntitySet="Account">

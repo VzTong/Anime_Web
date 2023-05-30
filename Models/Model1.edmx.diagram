@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b6045009a16643a7874d7ac7bad34550" Name="Diagram1">
+      <Diagram DiagramId="b448cdf509cd4a3c99d1ea8d7d4fa6fc" Name="Diagram1">
         <EntityTypeShape EntityType="WEB_Anime_ASPModel.Account" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime_episode" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />

@@ -13,10 +13,10 @@ namespace Anime_Web.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class WEB_Anime_ASPEntities : DbContext
+    public partial class WEB_Anime_ASPEntities1 : DbContext
     {
-        public WEB_Anime_ASPEntities()
-            : base("name=WEB_Anime_ASPEntities")
+        public WEB_Anime_ASPEntities1()
+            : base("name=WEB_Anime_ASPEntities1")
         {
         }
     

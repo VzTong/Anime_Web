@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="input__item">
-                            <input type="text" name="name" placeholder="Your Name" />
+                            <input type="text" name="username" placeholder="Your Name" />
                             <span class="icon_profile"></span>
                         </div>
 
@@ -29,12 +29,17 @@
                         </div>
 
                         <div class="input__item">
-                            <input type="password" name="cf_password" placeholder="CF Password" />
+                            <input type="password" name="cf_password" placeholder="Confirm Password" />
                             <span class="icon_lock"></span>
+                        </div>
+
+                        <div>
+                            @ViewBag.Message;
                         </div>
 
                         <button type="submit" class="site-btn">Register Now</button>
                     </form>
+
                     <h5>
                         Already have an account? <a href="@Url.Action("Login", "Account")">Log In!</a>
                     </h5>
