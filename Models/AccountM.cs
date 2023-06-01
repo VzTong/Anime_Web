@@ -17,8 +17,8 @@ namespace Anime_Web.Models
         public string username { get; set; }
 
         [Required(ErrorMessage = "Email is required.")]
-        [RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.)|(([\w-]+\.)+))(a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
-                            ErrorMessage = "Please enter valid email.")]
+        //[RegularExpression(@"^([\w-\.]+)@((\[[0-9]{1,3}\.)|(([\w-]+\.)+))(a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$",
+        //                    ErrorMessage = "Please enter valid email.")]
         public string email { get; set; }
 
         [Required(ErrorMessage = "Password is required.")]
@@ -28,7 +28,7 @@ namespace Anime_Web.Models
 
         [NotMapped]
         [Required(ErrorMessage = "Password incorrect.")]
-        [Compare("Password", ErrorMessage = "Please confirm your password!")]
+        [Compare("password", ErrorMessage = "Please confirm your password!")]
         [DataType(DataType.Password)]
         public string cf_password { get; set; }
     }

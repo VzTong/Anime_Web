@@ -40,7 +40,8 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="@Url.Action("Index", "Home")">
+                        <a href="@Url.Action("Index", "AdminHome" )">
+                            <!-- Chưa làm -->
                             <img src="~/Content/img/logo.png" alt="" />
                         </a>
                     </div>
@@ -50,17 +51,18 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li>
-                                    <a href="@Url.Action("Index", "Home")">Homepage</a>
+                                    <a href="@Url.Action("Index", "AdminHome" )">Homepage</a> <!-- Chưa làm -->
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Categories", "Products")">
+                                    <a href="@Url.Action("AdminCategories", "AdminProducts" )">
+                                        <!-- Chưa làm -->
                                         Categories <span class="arrow_carrot-down"></span>
                                     </a>
 
                                     <ul class="dropdown">
 
                                         <li>
-                                            <a href="@Url.Action("Categories", "Products")">All genres</a>
+                                            <a href="@Url.Action(" AdminCategories", "AdminProducts" )">All genres</a> <!-- Chưa làm -->
                                         </li>
 
                                         <li><a href="#">Action</a></li>
@@ -72,7 +74,6 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="@Url.Action("Blog", "Home")">Our Blog</a></li>
 
                                 <li>
                                     <div class="header__right">
@@ -84,48 +85,48 @@
                                 <li>
                                     @if (Session["username"] == null || Session["username"] == " ")
                                     {
-                                        <div class="header__right col-lg-2">
-                                            <a href="@Url.Action("Login", "Account")">
-                                                <span class="icon_profile"></span>
-                                            </a>
-                                            <ul class="dropdown mt-3">
+                                    <div class="header__right col-lg-2">
+                                        <a href="@Url.Action("AdminLogin", "AdminAccount" )">
+                                            <span class="icon_profile"></span>
+                                        </a>
+                                        <ul class="dropdown mt-3">
 
-                                                <li>
-                                                    <a href="@Url.Action("Login", "Account")">Log In</a>
-                                                </li>
+                                            <li>
+                                                <a href="@Url.Action("AdminLogin", "AdminAccount" )">Log In</a>
+                                            </li>
 
-                                                <li>
-                                                    <a href="@Url.Action("Register", "Account")">Register</a>
-                                                </li>
+                                            <li>
+                                                <a href="@Url.Action("AdminRegister", "AdminAccount" )">Register</a>
+                                            </li>
 
-                                            </ul>
-                                        </div>
+                                        </ul>
+                                    </div>
                                     }
 
                                     else
                                     {
-                                        ViewBag.UserName = Session["username"].ToString();
+                                    ViewBag.UserName = Session["username"].ToString();
 
-                                        <div class="header__right col-lg-2" style="display: inline">
-                                            <a href="@Url.Action("Login", "Account")">
-                                                <span class="icon_profile"></span>
-                                                <span class="text-info">
-                                                    @ViewBag.UserName
-                                                </span>
-                                            </a>
-                                            <ul class="dropdown">
+                                    <div class="header__right col-lg-2" style="display: inline">
+                                        <a href="@Url.Action("AdminLogin", "AdminAccount" )">
+                                            <span class="icon_profile"></span>
+                                            <span class="text-info">
+                                                @ViewBag.UserName
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown">
 
-                                                <li>
-                                                    <a href="@Url.Action("Logout", "Account")">Log Out</a>
-                                                </li>
+                                            <li>
+                                                <a href="@Url.Action("AdminLogout", "AdminAccount" )">Log Out</a>
+                                            </li>
 
-                                            </ul>
-                                        </div>
+                                        </ul>
+                                    </div>
                                     }
 
-                                    </li>
+                                </li>
 
-                                </ul>
+                            </ul>
                         </nav>
 
                     </div>
@@ -149,15 +150,14 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="footer__logo">
-                            <a href="@Url.Action("Index", "Home")"><img src="~/Content/img/logo.png" alt="" /></a>
+                            <a href="@Url.Action(" Index", "AdminHome" )"><img src="~/Content/img/logo.png" alt="" /></a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="footer__nav">
                             <ul>
-                                <li class="active"><a href="@Url.Action("Index", "Home")">Homepage</a></li>
-                                <li><a href="@Url.Action("Categories", "Products")">Categories</a></li>
-                                <li><a href="@Url.Action("Blog_details", "Home")">Our Blog</a></li>
+                                <li class="active"><a href="@Url.Action(" Index", "AdminHome" )">Homepage</a></li>
+                                <li><a href="@Url.Action(" AdminCategories", "AdminProducts" )">Categories</a></li>
                             </ul>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "AdminRegister";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,8 +10,8 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="login__form">
-                    <h3>Sign Up</h3>
-                    <form action="Register" method="post">
+                    <h3>Sign Up ADMIN</h3>
+                    <form action="AdminRegister" method="post">
                         <div class="text-danger">@Html.ValidationSummary()</div>
                         <div class="input__item">
                             <input type="text" name="email" placeholder="Email address" />
@@ -41,7 +41,7 @@
                     </form>
 
                     <h5>
-                        Already have an account? <a href="@Url.Action("Login", "Account")">Log In!</a>
+                        Already have an account? <a href="@Url.Action("AdminLogin", "AdminAccount")">Log In!</a>
                     </h5>
                 </div>
             </div>

@@ -7,46 +7,47 @@ using Anime_Web.Models;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Anime_Web.Controllers
+namespace Anime_Web.Areas.Admin.Controllers
 {
-    public class AccountController : Controller
+    public class AdminAccountController : Controller
     {
+        // GET: Admin/AdminAccount
         private readonly WEB_Anime_ASPEntities1 _db = new WEB_Anime_ASPEntities1();
 
         [HttpGet]
-        public ActionResult Register()
+        public ActionResult AdminRegister()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(AccountM _User)
+        public ActionResult AdminRegister(AccountM _Admin)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     // check user_name 
-                    var check = _db.Accounts.FirstOrDefault(s => s.username == _User.username);
+                    var check = _db.Accounts.FirstOrDefault(s => s.username == _Admin.username);
 
                     if (check == null)
                     {
-                        _User.password = GetMD5(_User.password);
+                        _Admin.password = GetMD5(_Admin.password);
                         _db.Configuration.ValidateOnSaveEnabled = false;
 
                         var account = new Account
                         {
-                            email = _User.email,
-                            username = _User.username,
-                            password = _User.password,
-                            ischeck = 0
+                            email = _Admin.email,
+                            username = _Admin.username,
+                            password = _Admin.password,
+                            ischeck = 1
                         };
                         _db.Accounts.Add(account);
                         _db.SaveChanges();
 
                         ModelState.Clear();
                         ViewBag.Message = account.username + " Successfully registerd.";
-                        return RedirectToAction("Login", "Account");
+                        return RedirectToAction("AdminLogin", "AdminAccount");
                     }
                     else
                     {
@@ -71,13 +72,13 @@ namespace Anime_Web.Controllers
         //-------------------------------//
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult AdminLogin()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult AdminLogin(string adminname, string password)
         {
             if (ModelState.IsValid)
             {
@@ -87,30 +88,21 @@ namespace Anime_Web.Controllers
                 {
                     //ViewBag.error = "mật khẩu sai";
                     ViewBag.mess_err = "tài khoản hoặc mật khẩu không chính xác";
-                    return RedirectToAction("Login");
+                    return RedirectToAction("AdminLogin");
                 }
-                var data1 = _db.Accounts.Where(x => x.username.Equals(username) && x.password.Equals(f_pass));
-                var data2 = _db.Accounts.Where(x => x.email.Equals(username) && x.password.Equals(f_pass));
-                if ((data1.Count() != 0))
+                var data = _db.Accounts.Where(x => x.username.Equals(adminname) && x.password.Equals(f_pass));
+                if ((data.Count() != 0))
                 {
-                    Session["username"] = data1.FirstOrDefault().username;
-                    Session["id"] = data1.FirstOrDefault().id;
+                    Session["username"] = data.FirstOrDefault().username;
+                    Session["id"] = data.FirstOrDefault().id;
 
-                    ViewBag.Message = data1.FirstOrDefault().username + " Successfully registerd.";
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.Message = data.FirstOrDefault().username + " Successfully registerd.";
+                    return RedirectToAction("Index", "AdminHome");
                 }
-                //else if ((data2.Count() != 0))
-                //{
-                //    Session["username"] = data2.FirstOrDefault().email;
-                //    Session["id"] = data2.FirstOrDefault().id;
-
-                //    ViewBag.Message = data2.FirstOrDefault().username + " Successfully registerd.";
-                //    return RedirectToAction("Index", "Home");
-                //}
                 else
                 {
                     ViewBag.mess_err = "tài khoản hoặc mật khẩu không chính xác";
-                    return RedirectToAction("Login");
+                    return RedirectToAction("AdminLogin");
                 }
             }
 
@@ -118,7 +110,7 @@ namespace Anime_Web.Controllers
             return View();
         }
 
-        public ActionResult Logout()
+        public ActionResult AdminLogout()
         {
             Session.Clear();//remove session
             return RedirectToAction("Index", "Home");

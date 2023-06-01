@@ -1,7 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Admin Login";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <div class="normal__breadcrumb__text">
-                    <h2>Login</h2>
+                    <h2>Login ADMIN</h2>
                     <p>Welcome to the official Anime blog.</p>
                 </div>
             </div>
@@ -26,15 +26,14 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="login__form">
-                    <h3>Login</h3>
+                    <h3>Login ADMIN</h3>
 
-                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    @using (Html.BeginForm("AdminLogin", "AdminAccount", FormMethod.Post))
                     {
-                        <div class="text-danger">
-                            <span>
-                                @ViewBag.mess_err
-                            </span>
-                        </div>
+                        if(ViewBag.mess_err != null)
+                        {
+                            <span class="text-danger">@ViewBag.mess_err</span>
+                        }
 
                         <div class="input__item">
                             <input type="text" name="username" placeholder="Your Name" />
@@ -45,7 +44,7 @@
                             <input type="password" name="password" placeholder="Password" />
                             <span class="icon_lock"></span>
                         </div>
-                        
+
                         <button type="submit" class="site-btn">Login Now</button>
                     }
 
@@ -56,7 +55,7 @@
             <div class="col-lg-6">
                 <div class="login__register">
                     <h3>Don't Have An Account?</h3>
-                    <a href="@Url.Action("Register", "Account")" class="primary-btn">Register Now</a>
+                    <a href="@Url.Action("AdminRegister", "AdminAccount")" class="primary-btn">Register Now</a>
                 </div>
             </div>
         </div>
