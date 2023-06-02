@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta http-equiv="refresh" content="60" /> <!--refresh sau mỗi 60s-->
+    <!--<meta http-equiv="refresh" content="60" />--> <!--refresh sau mỗi 60s-->
     <title>@ViewBag.Title</title>
 
     <!-- Google Font -->
@@ -123,9 +123,9 @@
                                         </div>
                                     }
 
-                                    </li>
+                                </li>
 
-                                </ul>
+                            </ul>
                         </nav>
 
                     </div>
@@ -135,9 +135,10 @@
         </div>
     </header>
 
-
-    <div>
-        @RenderBody()
+    <div class="wrapper">
+        <div>
+            @RenderBody()
+        </div>
 
         <footer class="footer">
             <div class="page-up">
@@ -171,18 +172,18 @@
                     <input type="text" id="search-input" placeholder="Search here....." />
                 </form>
             </div>
+
         </div>
     </div>
+        <script src="~/Content/js/jquery-3.3.1.min.js"></script>
+        <script src="~/Content/js/bootstrap.min.js"></script>
+        <script src="~/Content/js/player.js"></script>
+        <script src="~/Content/js/jquery.nice-select.min.js"></script>
+        <script src="~/Content/js/mixitup.min.js"></script>
+        <script src="~/Content/js/jquery.slicknav.js"></script>
+        <script src="~/Content/js/owl.carousel.min.js"></script>
+        <script src="~/Content/js/main.js"></script>
 
-    <script src="~/Content/js/jquery-3.3.1.min.js"></script>
-    <script src="~/Content/js/bootstrap.min.js"></script>
-    <script src="~/Content/js/player.js"></script>
-    <script src="~/Content/js/jquery.nice-select.min.js"></script>
-    <script src="~/Content/js/mixitup.min.js"></script>
-    <script src="~/Content/js/jquery.slicknav.js"></script>
-    <script src="~/Content/js/owl.carousel.min.js"></script>
-    <script src="~/Content/js/main.js"></script>
-
-    @RenderSection("scripts", required: false)
+        @RenderSection("scripts", required: false)
 </body>
 </html>>

@@ -1901,15 +1901,46 @@ ol {
 	text-align: center;
 }
 
+
+/*---------------------
+  Admin-Layout
+-----------------------*/
+
+.list-group-item {
+	color: aliceblue;
+	background: #071320;
+	border-radius: 0.25rem;
+}
+
+.list-group-item a{
+	color: aliceblue;
+}
+
+aside ul li:hover, .item-active {
+	background: #e53637;
+	color: #ffffff;
+}
+
+/*---------------------
+  static end Footer
+-----------------------*/
+
+.wrapper {
+	display:grid;
+	grid-template-rows: 1fr auto;
+	min-height: 100vh;
+}
+
+
 /*---------------------
   Footer
 -----------------------*/
-
 .footer {
 	background: #070720;
 	padding-top: 60px;
 	padding-bottom: 40px;
 	position: relative;
+	transform: translateY(25px);
 }
 
 .page-up {
@@ -2311,3 +2342,4 @@ ol {
 		padding: 18px 20px 20px;
 	}
 }
+

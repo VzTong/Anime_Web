@@ -30,13 +30,12 @@
 
                     @using (Html.BeginForm("AdminLogin", "AdminAccount", FormMethod.Post))
                     {
-                        if(ViewBag.mess_err != null)
-                        {
-                            <span class="text-danger">@ViewBag.mess_err</span>
-                        }
+
+                        <span class="text-danger">@ViewBag.mess_err</span>
+
 
                         <div class="input__item">
-                            <input type="text" name="username" placeholder="Your Name" />
+                            <input type="text" name="adminname" placeholder="Your Name" />
                             <span class="icon_profile"></span>
                         </div>
 

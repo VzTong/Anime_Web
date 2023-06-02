@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta http-equiv="refresh" content="60" /> <!--refresh sau mỗi 60s-->
+    <!--<meta http-equiv="refresh" content="60" />--> <!--refresh sau mỗi 60s-->
     <title>@ViewBag.Title</title>
 
     <!-- Google Font -->
@@ -29,6 +29,9 @@
 </head>
 
 <body>
+
+
+
     <!-- Page Preloader -->
     <div id="preloder">
         <div class="loader"></div>
@@ -85,43 +88,43 @@
                                 <li>
                                     @if (Session["username"] == null || Session["username"] == " ")
                                     {
-                                    <div class="header__right col-lg-2">
-                                        <a href="@Url.Action("AdminLogin", "AdminAccount" )">
-                                            <span class="icon_profile"></span>
-                                        </a>
-                                        <ul class="dropdown mt-3">
+                                        <div class="header__right col-lg-2">
+                                            <a href="@Url.Action("AdminLogin", "AdminAccount" )">
+                                                <span class="icon_profile"></span>
+                                            </a>
+                                            <ul class="dropdown mt-3">
 
-                                            <li>
-                                                <a href="@Url.Action("AdminLogin", "AdminAccount" )">Log In</a>
-                                            </li>
+                                                <li>
+                                                    <a href="@Url.Action("AdminLogin", "AdminAccount" )">Log In</a>
+                                                </li>
 
-                                            <li>
-                                                <a href="@Url.Action("AdminRegister", "AdminAccount" )">Register</a>
-                                            </li>
+                                                <li>
+                                                    <a href="@Url.Action("AdminRegister", "AdminAccount" )">Register</a>
+                                                </li>
 
-                                        </ul>
-                                    </div>
+                                            </ul>
+                                        </div>
                                     }
 
                                     else
                                     {
-                                    ViewBag.UserName = Session["username"].ToString();
+                                        ViewBag.UserName = Session["username"].ToString();
 
-                                    <div class="header__right col-lg-2" style="display: inline">
-                                        <a href="@Url.Action("AdminLogin", "AdminAccount" )">
-                                            <span class="icon_profile"></span>
-                                            <span class="text-info">
-                                                @ViewBag.UserName
-                                            </span>
-                                        </a>
-                                        <ul class="dropdown">
+                                        <div class="header__right col-lg-2" style="display: inline">
+                                            <a href="@Url.Action("AdminLogin", "AdminAccount" )">
+                                                <span class="icon_profile"></span>
+                                                <span class="text-info">
+                                                    @ViewBag.UserName
+                                                </span>
+                                            </a>
+                                            <ul class="dropdown">
 
-                                            <li>
-                                                <a href="@Url.Action("AdminLogout", "AdminAccount" )">Log Out</a>
-                                            </li>
+                                                <li>
+                                                    <a href="@Url.Action("AdminLogout", "AdminAccount" )">Log Out</a>
+                                                </li>
 
-                                        </ul>
-                                    </div>
+                                            </ul>
+                                        </div>
                                     }
 
                                 </li>
@@ -136,9 +139,10 @@
         </div>
     </header>
 
-
-    <div>
-        @RenderBody()
+    <div class="wrapper">
+        <div>
+            @RenderBody()
+        </div>
 
         <footer class="footer">
             <div class="page-up">
@@ -172,6 +176,7 @@
                 </form>
             </div>
         </div>
+
     </div>
 
     <script src="~/Content/js/jquery-3.3.1.min.js"></script>

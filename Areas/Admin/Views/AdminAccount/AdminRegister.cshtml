@@ -1,7 +1,7 @@
-﻿
+﻿@model Anime_Web.Models.AccountM
 @{
     ViewBag.Title = "AdminRegister";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 <!-- Signup Section Begin -->
@@ -16,21 +16,37 @@
                         <div class="input__item">
                             <input type="text" name="email" placeholder="Email address" />
                             <span class="icon_mail"></span>
+                            @Html.ValidationMessageFor(model => model.email , null, new
+                            {
+                                @class = "text-danger",
+                            })
                         </div>
 
                         <div class="input__item">
                             <input type="text" name="username" placeholder="Your Name" />
                             <span class="icon_profile"></span>
+                            @Html.ValidationMessageFor(model => model.username, null, new
+                            {
+                                @class = "text-danger",
+                            })
                         </div>
 
                         <div class="input__item">
                             <input type="password" name="password" placeholder="Password" />
                             <span class="icon_lock"></span>
+                            @Html.ValidationMessageFor(model => model.password , null, new
+                            {
+                                @class = "text-danger",
+                            })
                         </div>
 
                         <div class="input__item">
                             <input type="password" name="cf_password" placeholder="Confirm Password" />
                             <span class="icon_lock"></span>
+                            @Html.ValidationMessageFor(model => model.cf_password , null, new
+                            {
+                                @class = "text-danger",
+                            })
                         </div>
 
                         <div>
