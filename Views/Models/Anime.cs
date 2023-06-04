@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anime_Web.Models
+namespace Anime_Web.Views.Models
 {
     using System;
     using System.Collections.Generic;

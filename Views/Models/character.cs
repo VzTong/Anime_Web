@@ -7,17 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anime_Web.Models
+namespace Anime_Web.Views.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Anime_episode
+    public partial class character
     {
-        public int id { get; set; }
-        public int Anime_id_episode { get; set; }
-        public int Anime_ep { get; set; }
-        public string Anime_ep_vid { get; set; }
+        public int ID { get; set; }
+        public string name { get; set; }
+        public int Anime_id_character { get; set; }
     
         public virtual Anime Anime { get; set; }
     }

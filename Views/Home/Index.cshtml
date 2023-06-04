@@ -1,7 +1,9 @@
-﻿
+﻿@model IEnumerable<Anime_Web.Models.Anime>
+
 @{
     ViewBag.Title = "Anime HomePage";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    Anime_Web.Models.WEB_Anime_ASPEntities1 db = new Anime_Web.Models.WEB_Anime_ASPEntities1();
 }
 
 
@@ -33,6 +35,7 @@
                             <a href="@Url.Action("Anime_Watching", "Products")">
                                 <span>Watch Now</span> <i class="fa fa-angle-right"></i>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -61,11 +64,16 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
+
+                @* begin trending now *@
                 <div class="trending__product">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8">
                             <div class="section-title">
+
+                                @* titlle  *@
                                 <h4>Trending Now</h4>
+
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4">
@@ -76,7 +84,52 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
+
+                        @foreach (var item in db.Animes)
+                        {
+                            foreach (var item2 in db.Anime_episode)
+                            {
+                                foreach (var item3 in db.categories)
+                                {
+
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="product__item">
+                                            <div class="product__item__pic set-bg">
+                                                <a href="@Url.Action("Anime_details", "Products")">
+                                                    <img src="~/@item.covers" />
+                                                </a>
+                                                @if (item.episode_count != 0 && item2.Anime_ep != 0)
+                                                {
+
+                                                    <div class="ep">@item2.Anime_ep / @item.episode_count</div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="ep">Trailer / ??</div>
+                                                }
+
+                                                <div class="comment">
+                                                    <i class="fa fa-comments"></i> 11
+                                                </div>
+                                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                            </div>
+                                            <div class="product__item__text">
+                                                <ul>
+                                                    <li><a href="#" style="color: white">@item3.name</a></li>
+                                                    <li><a href="#" style="color: white">Active</a></li>
+                                                    <li><a href="#" style="color: white">Movie</a></li>
+                                                </ul>
+                                                <h5>
+                                                    <a href="@Url.Action("Anime_details", "Products")">@item.name</a>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg">
@@ -100,6 +153,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg">
@@ -217,6 +272,8 @@
                         </div>
                     </div>
                 </div>
+
+                @* end trending now *@
                 <div class="popular__product">
                     <div class="row">
                         <div class="col-lg-8 col-md-8 col-sm-8">

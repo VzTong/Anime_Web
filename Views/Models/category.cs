@@ -7,18 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Anime_Web.Models
+namespace Anime_Web.Views.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Anime_episode
+    public partial class category
     {
-        public int id { get; set; }
-        public int Anime_id_episode { get; set; }
-        public int Anime_ep { get; set; }
-        public string Anime_ep_vid { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public category()
+        {
+            this.Animes = new HashSet<Anime>();
+        }
     
-        public virtual Anime Anime { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Anime> Animes { get; set; }
     }
 }
