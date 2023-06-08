@@ -12,7 +12,7 @@ namespace Anime_Web.Areas.Admin.Controllers
     public class AdminAccountController : Controller
     {
         // GET: Admin/AdminAccount
-        private readonly WEB_Anime_ASPEntities1 _db = new WEB_Anime_ASPEntities1();
+        public readonly WEB_Anime_ASPEntities _db = new WEB_Anime_ASPEntities();
 
         [HttpGet]
         public ActionResult AdminRegister()
@@ -51,7 +51,7 @@ namespace Anime_Web.Areas.Admin.Controllers
                     }
                     else
                     {
-                        ViewBag.error = "Username already exists";
+                        ViewBag.error = "AdminName already exists";
                         return View();
                     }
                 }
@@ -78,7 +78,7 @@ namespace Anime_Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult AdminLogin(string adminname, string password)
+        public ActionResult AdminLogin(string AdminName, string password)
         {
             if (ModelState.IsValid)
             {
@@ -90,14 +90,27 @@ namespace Anime_Web.Areas.Admin.Controllers
                     ViewBag.mess_err = "tài khoản hoặc mật khẩu không chính xác";
                     return RedirectToAction("AdminLogin");
                 }
-                var data = _db.Accounts.Where(x => x.username.Equals(adminname) && x.password.Equals(f_pass));
+                var data = _db.Accounts.Where(x => x.username.Equals(AdminName) && x.password.Equals(f_pass) && x.ischeck == 1);
+                var data2 = _db.Accounts.Where(x => x.email.Equals(AdminName) && x.password.Equals(f_pass) && x.ischeck == 1) ;
+
                 if ((data.Count() != 0))
                 {
-                    Session["username"] = data.FirstOrDefault().username;
+                    Session["AdminName"] = data.FirstOrDefault().username;
                     Session["id"] = data.FirstOrDefault().id;
+                    Session["ischeck"] = data.FirstOrDefault().ischeck;
 
                     ViewBag.Message = data.FirstOrDefault().username + " Successfully registerd.";
                     return RedirectToAction("Index", "AdminHome");
+                }
+                else if ((data2.Count() != 0))
+                {
+                    Session["AdminName"] = data2.FirstOrDefault().username;
+                    Session["id"] = data2.FirstOrDefault().id;
+                    Session["ischeck"] = data2.FirstOrDefault().ischeck;
+
+
+                    ViewBag.Message = data2.FirstOrDefault().username + " Successfully registerd.";
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

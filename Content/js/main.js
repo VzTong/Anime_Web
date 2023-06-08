@@ -107,4 +107,12 @@
         }
     });
 
+    $("#tab_list ul > li > a").each((i, item) => {
+        if ($(item).attr("href").trim("/") == url) {
+            $(item).closest("li").addClass("active");
+        } else {
+            $(item).closest("li").removeClass("active");
+        }
+    });
+
 })(jQuery);

@@ -1,5 +1,7 @@
 ﻿@{
-    var check_login = Session["username"] as Anime_Web.Models.Account;
+    var ischeck = (Session["ischeck"]) as Anime_Web.Models.Account;
+    var check_login = Session["AdminName"] as Anime_Web.Models.Account;
+
 }
 
 <!DOCTYPE html>
@@ -44,7 +46,6 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="@Url.Action("Index", "AdminHome" )">
-                            <!-- Chưa làm -->
                             <img src="~/Content/img/logo.png" alt="" />
                         </a>
                     </div>
@@ -54,18 +55,18 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li>
-                                    <a href="@Url.Action("Index", "AdminHome" )">Homepage</a> <!-- Chưa làm -->
+                                    <a href="@Url.Action("Index", "AdminHome" )">Homepage</a> 
                                 </li>
                                 <li>
                                     <a href="@Url.Action("AdminCategories", "AdminProducts" )">
-                                        <!-- Chưa làm -->
+                                        
                                         Categories <span class="arrow_carrot-down"></span>
                                     </a>
 
                                     <ul class="dropdown">
 
                                         <li>
-                                            <a href="@Url.Action(" AdminCategories", "AdminProducts" )">All genres</a> <!-- Chưa làm -->
+                                            <a href="@Url.Action(" AdminCategories", "AdminProducts" )">All genres</a> 
                                         </li>
 
                                         <li><a href="#">Action</a></li>
@@ -86,7 +87,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    @if (Session["username"] == null || Session["username"] == " ")
+                                    @if (Session["AdminName"] == null || Session["AdminName"] == " ")
                                     {
                                         <div class="header__right col-lg-2">
                                             <a href="@Url.Action("AdminLogin", "AdminAccount" )">
@@ -108,7 +109,7 @@
 
                                     else
                                     {
-                                        ViewBag.UserName = Session["username"].ToString();
+                                        ViewBag.UserName = Session["AdminName"].ToString();
 
                                         <div class="header__right col-lg-2" style="display: inline">
                                             <a href="@Url.Action("AdminLogin", "AdminAccount" )">

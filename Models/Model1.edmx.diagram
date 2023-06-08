@@ -4,21 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="b448cdf509cd4a3c99d1ea8d7d4fa6fc" Name="Diagram1">
+      <Diagram DiagramId="e03ba20ae62e49c089201b02395972c9" Name="Diagram1" ZoomLevel="83">
         <EntityTypeShape EntityType="WEB_Anime_ASPModel.Account" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime_episode" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.category" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.character" Width="1.5" PointX="3" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.cover" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.studio" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="WEB_Anime_ASPModel.trailer" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_Anime_ASPModel.Anime_episode" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_Anime_ASPModel.category" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WEB_Anime_ASPModel.trailer" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
         <AssociationConnector Association="WEB_Anime_ASPModel.fk_Anime_ep_Anime" ManuallyRouted="false" />
-        <AssociationConnector Association="WEB_Anime_ASPModel.fk_character_Anime" ManuallyRouted="false" />
-        <AssociationConnector Association="WEB_Anime_ASPModel.fk_cover_Anime" ManuallyRouted="false" />
-        <AssociationConnector Association="WEB_Anime_ASPModel.fk_trailer_Anime" ManuallyRouted="false" />
+        <AssociationConnector Association="WEB_Anime_ASPModel.FK_trailer_Anime" ManuallyRouted="false" />
         <AssociationConnector Association="WEB_Anime_ASPModel.Anime_category" ManuallyRouted="false" />
-        <AssociationConnector Association="WEB_Anime_ASPModel.Anime_studio" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

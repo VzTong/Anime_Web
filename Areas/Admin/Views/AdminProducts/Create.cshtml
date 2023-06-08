@@ -1,13 +1,231 @@
 ﻿
+@model IEnumerable<Anime_Web.Models.Anime>
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Anime_Web.Models.WEB_Anime_ASPEntities db = new Anime_Web.Models.WEB_Anime_ASPEntities();
 }
 
-<form action="/upload" method="post" enctype="multipart/form-data">
-    <div class="dropzone" id="my-dropzone"></div>
-    <button type="submit" class="btn btn-primary">Upload</button>
-</form>
+<!-- Product Section Begin -->
+<section class="hero">
+    <div class="container">
+        <div style="display:flex">
+            <div class="header p-3" style="width:25%">
+                <aside>
+                    <ul class="list-group mt-4">
+                        <li class="list-group-item my-1 item-active text-center">
+                            <a href="#">
+                                Manage Anime
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="#">
+                                Manage Anime Category
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="#">
+                                Manage Anime Episode
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="#">
+                                Manage Anime Trailers
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+
+            </div>
+
+
+            <div style="width:85%" class="ml-3">
+
+                <h5 class="mt-4 mb-3">
+                    <a href="@Url.Action("Index", "AdminHome" )" style="color: #79b2d3">
+                        <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+                        Back to list page
+                    </a>
+                </h5>
+
+                <div class="product__sidebar" ">
+                    <div class="product__sidebar__view">
+                        <div class="section-title">
+                            <h5>Add Anime</h5>
+                        </div>
+
+                        <div style="width: 90%; margin-left: 20px">
+
+                            <form action="Create" method="post" enctype="multipart/form-data">
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime name:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="name" class="form-control" style="background-color: #2e42527f; color: #ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime release time:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="date" name="year" class="form-control" style="background-color: #2e42527f; color: #ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime description:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" name="description" style="height: 100px; background-color: #2e42527f; color: #ffffff"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime Rating:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="rating" class="form-control" style="background-color: #2e42527f; color: #ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime characters:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <textarea type="text" name="characters" class="form-control" style="background-color: #2e42527f; color: #ffffff"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime categories:
+                                    </label>
+                                    <div class="grid-container" style="display: block">
+
+                                        <div>
+                                            <div class="box" style="display: inline-flex; margin-top: -30px">
+                                                @foreach (var item in db.categories)
+                                                {
+                                                    <div style="display:flex">
+                                                        @if (item.id % 2 == 0)
+                                                        {
+                                                            <div class="item text-white" style="margin-right: 50px">
+                                                                <div class="checkbox-rect">
+                                                                    <input type="checkbox" id="@item.id" name="check">
+                                                                    <label for="@item.id">@item.name</label>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="box" style="display: inline-flex; margin-top: -60px">
+                                                @foreach (var item in db.categories)
+                                                {
+                                                    <div style="display:flex">
+                                                        @if (item.id % 2 != 0)
+                                                        {
+                                                            <div class="item text-white mr-5">
+                                                                <div class="checkbox-rect">
+                                                                    <input type="checkbox" id="@item.id" name="check">
+                                                                    <label for="@item.id">@item.name</label>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        @*<div>
+                                            <div class="box" style="display: inline-block">
+                                                @foreach (var item in db.categories)
+                                                {
+                                                    <div style="display:flex">
+                                                        @if (item.id % 2 != 0)
+                                                        {
+                                                            <div class="item text-white mr-5">
+                                                                <div class="checkbox-rect">
+                                                                    <input type="checkbox" id="@item.id" name="check">
+                                                                    <label for="@item.id">@item.name</label>
+                                                                </div>
+                                                            </div>
+                                                        }
+
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>*@
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime Studios:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="studios" class="form-control" style="background-color: #2e42527f; color: #ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Estimated number of episodes:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <input type="number" name="episode_count" class="form-control" style="background-color: #2e42527f; color: #ffffff">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label class="col-sm-2 col-form-label" style="color: #ffffff">
+                                        Anime cover art:
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <div class="dropzone" id="my-dropzone" style="background-color: #2e42527f; color: #ffffff; border-radius: 2px;"></div>
+                                        <input type="file" name="covers" accept="image/*" style="display:none; " />
+                                        <p class="help-block">Allowed file types: .image/*</p>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-outline-primary">Upload</button>
+                            </form>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+
+
+@* Gọi hàm xử lý file *@
 
 @section Scripts {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css" rel="stylesheet" />
@@ -18,19 +236,16 @@
             var myDropzone = new Dropzone("#my-dropzone", {
                 url: "/upload",
                 autoProcessQueue: false,
-                uploadMultiple: true,
-                parallelUploads: 5,
-                maxFiles: 5,
                 addRemoveLinks: true,
-                dictDefaultMessage: "Click hoặc kéo các file vào đây",
-                dictRemoveFile: "Xóa file",
-                acceptedFiles: "image/*,.mp4,.avi,.mkv,.wmv,.mov",
-                maxFilesize: 500,
+                dictDefaultMessage: "Click to choose a file",
+                dictRemoveFile: "Remove",
+                acceptedFiles: "image/*", //,.mp4,.avi,.mkv,.wmv,.mov
+                maxFiles: 1,
                 init: function () {
+                    var input = $('input[name="file"]');
                     this.on("addedfile", function (file) {
-
                         //create image preview before upload
-                        if(file.type.match(/image.*/)) {
+                        if (file.type.match(/image.*/)) {
                             var reader = new FileReader();
                             reader.readAsDataURL(file);
                             reader.onload = function (e) {
@@ -46,32 +261,67 @@
                             }
                         }
 
-                        //create video preview before upload
-                        if(file.type.match(/video.*/)) {
-                            var video = document.createElement('video');
-                            var videoDiv = document.createElement('div');
-                            var closeVideoBtn = document.createElement('button');
-                            closeVideoBtn.setAttribute("type", "button");
-                            closeVideoBtn.setAttribute("class", "close");
-                            closeVideoBtn.innerHTML = "&times;";
-                            video.setAttribute("src", URL.createObjectURL(file));
-                            video.setAttribute("height", 200);
-                            video.setAttribute("width", "100%");
-                            video.setAttribute("controls", "controls");
-                            videoDiv.appendChild(closeVideoBtn);
-                            videoDiv.appendChild(video);
-                            file.previewElement.appendChild(videoDiv);
-                            file.previewElement.classList.add("dz-success");
-                            closeVideoBtn.addEventListener('click', function(){
-                                videoDiv.remove();
-                                file.previewElement.classList.remove("dz-success");
-                            });
+                        ////create video preview before upload
+                        //else if (file.type.match(/video.*/)) {
+                        //    var video = document.createElement('video');
+                        //    var videoDiv = document.createElement('div');
+                        //    var closeVideoBtn = document.createElement('button');
+                        //    closeVideoBtn.setAttribute("type", "button");
+                        //    closeVideoBtn.setAttribute("class", "close");
+                        //    closeVideoBtn.innerHTML = "&times;";
+                        //    video.setAttribute("src", URL.createObjectURL(file));
+                        //    video.setAttribute("height", 200);
+                        //    video.setAttribute("width", "100%");
+                        //    video.setAttribute("controls", "controls");
+                        //    videoDiv.appendChild(closeVideoBtn);
+                        //    videoDiv.appendChild(video);
+                        //    file.previewElement.appendChild(videoDiv);
+                        //    file.previewElement.classList.add("dz-success");
+                        //    closeVideoBtn.addEventListener('click', function () {
+                        //        videoDiv.remove();
+                        //        file.previewElement.classList.remove("dz-success");
+                        //    });
 
+                        //}
+                        if (this.files[1] != null) {
+                            this.removeFile(this.files[0]);
+                            input.val('');
                         }
+                        input.val(file.name);
+                    });
+                    this.on("removedfile", function (file) {
+                        input.val('');
+                    });
+                    // Preview file
+                    this.on("thumbnail", function (file) {
+                        // create an image thumbnail for image files
+                        if (file.type.match(/image.*/)) {
+                            this.emit('thumbnail', URL.createObjectURL(file));
+
+                        } //else if (file.type.match(/video.*/)) {
+                        //    var video = document.createElement('video');
+                        //    var videoDiv = document.createElement('div');
+                        //    var closeVideoBtn = document.createElement('button');
+                        //    closeVideoBtn.setAttribute("type", "button");
+                        //    closeVideoBtn.setAttribute("class", "close");
+                        //    closeVideoBtn.innerHTML = "&times;";
+                        //    video.setAttribute("src", URL.createObjectURL(file));
+                        //    video.setAttribute("height", 200);
+                        //    video.setAttribute("width", 300);
+                        //    videoDiv.appendChild(closeVideoBtn);
+                        //    videoDiv.appendChild(video);
+                        //    this.previewsContainer.appendChild(videoDiv);
+                        //    // Remove video preview if file removed
+                        //    closeVideoBtn.onclick = function () {
+                        //        videoDiv.parentNode.removeChild(videoDiv);
+                        //        myDropzone.removeFile(file);
+                        //    };
+                        //}
+
+
                     });
                 }
             });
-
             $(document).on('click', 'button[type="submit"]', function (e) {
                 e.preventDefault();
                 if (myDropzone.getQueuedFiles().length > 0) {
@@ -83,3 +333,4 @@
         });
     </script>
 }
+

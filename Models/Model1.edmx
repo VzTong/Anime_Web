@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WEB_Anime_ASPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WEB_Anime_ASPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Account">
           <Key>
             <PropertyRef Name="id" />
@@ -24,7 +24,9 @@
           <Property Name="episode_count" Type="int" Nullable="false" />
           <Property Name="year" Type="date" Nullable="false" />
           <Property Name="description" Type="text" Nullable="false" />
-          <Property Name="rating" Type="float" Nullable="false" />
+          <Property Name="Anime_covers" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="studio" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="rating" Type="float" />
         </EntityType>
         <EntityType Name="Anime_category">
           <Key>
@@ -41,15 +43,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Anime_id_episode" Type="int" Nullable="false" />
           <Property Name="Anime_ep" Type="int" Nullable="false" />
-          <Property Name="Anime_ep_vid" Type="nchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Anime_studio">
-          <Key>
-            <PropertyRef Name="Anime_id_studio" />
-            <PropertyRef Name="studio_id" />
-          </Key>
-          <Property Name="Anime_id_studio" Type="int" Nullable="false" />
-          <Property Name="studio_id" Type="int" Nullable="false" />
+          <Property Name="Anime_ep_vid" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -58,38 +52,15 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
-        <EntityType Name="character">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Anime_id_character" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="cover">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Anime_id_cover" Type="int" Nullable="false" />
-          <Property Name="covers" Type="varchar" MaxLength="200" Nullable="false" />
-        </EntityType>
-        <EntityType Name="studio">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
         <EntityType Name="trailer">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Anime_id_trailer" Type="int" Nullable="false" />
-          <Property Name="trailers" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="trailers" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
-        <Association Name="fk_Anime_category_Anime">
+        <Association Name="FK_Anime_category_Anime">
           <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
           <End Role="Anime_category" Type="Self.Anime_category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -101,7 +72,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Anime_category_category">
+        <Association Name="FK_Anime_category_category">
           <End Role="category" Type="Self.category" Multiplicity="1" />
           <End Role="Anime_category" Type="Self.Anime_category" Multiplicity="*" />
           <ReferentialConstraint>
@@ -125,55 +96,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Anime_studio_Anime">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
-          <End Role="Anime_studio" Type="Self.Anime_studio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Anime">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Anime_studio">
-              <PropertyRef Name="Anime_id_studio" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Anime_studio_Studio">
-          <End Role="studio" Type="Self.studio" Multiplicity="1" />
-          <End Role="Anime_studio" Type="Self.Anime_studio" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="studio">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Anime_studio">
-              <PropertyRef Name="studio_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_character_Anime">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Anime">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="character">
-              <PropertyRef Name="Anime_id_character" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_cover_Anime">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
-          <End Role="cover" Type="Self.cover" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Anime">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="cover">
-              <PropertyRef Name="Anime_id_cover" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_trailer_Anime">
+        <Association Name="FK_trailer_Anime">
           <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
           <End Role="trailer" Type="Self.trailer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -190,17 +113,13 @@
           <EntitySet Name="Anime" EntityType="Self.Anime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Anime_category" EntityType="Self.Anime_category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Anime_episode" EntityType="Self.Anime_episode" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Anime_studio" EntityType="Self.Anime_studio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="character" EntityType="Self.character" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="cover" EntityType="Self.cover" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="studio" EntityType="Self.studio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="trailer" EntityType="Self.trailer" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="fk_Anime_category_Anime" Association="Self.fk_Anime_category_Anime">
+          <AssociationSet Name="FK_Anime_category_Anime" Association="Self.FK_Anime_category_Anime">
             <End Role="Anime" EntitySet="Anime" />
             <End Role="Anime_category" EntitySet="Anime_category" />
           </AssociationSet>
-          <AssociationSet Name="fk_Anime_category_category" Association="Self.fk_Anime_category_category">
+          <AssociationSet Name="FK_Anime_category_category" Association="Self.FK_Anime_category_category">
             <End Role="category" EntitySet="category" />
             <End Role="Anime_category" EntitySet="Anime_category" />
           </AssociationSet>
@@ -208,28 +127,13 @@
             <End Role="Anime" EntitySet="Anime" />
             <End Role="Anime_episode" EntitySet="Anime_episode" />
           </AssociationSet>
-          <AssociationSet Name="fk_Anime_studio_Anime" Association="Self.fk_Anime_studio_Anime">
-            <End Role="Anime" EntitySet="Anime" />
-            <End Role="Anime_studio" EntitySet="Anime_studio" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Anime_studio_Studio" Association="Self.fk_Anime_studio_Studio">
-            <End Role="studio" EntitySet="studio" />
-            <End Role="Anime_studio" EntitySet="Anime_studio" />
-          </AssociationSet>
-          <AssociationSet Name="fk_character_Anime" Association="Self.fk_character_Anime">
-            <End Role="Anime" EntitySet="Anime" />
-            <End Role="character" EntitySet="character" />
-          </AssociationSet>
-          <AssociationSet Name="fk_cover_Anime" Association="Self.fk_cover_Anime">
-            <End Role="Anime" EntitySet="Anime" />
-            <End Role="cover" EntitySet="cover" />
-          </AssociationSet>
-          <AssociationSet Name="fk_trailer_Anime" Association="Self.fk_trailer_Anime">
+          <AssociationSet Name="FK_trailer_Anime" Association="Self.FK_trailer_Anime">
             <End Role="Anime" EntitySet="Anime" />
             <End Role="trailer" EntitySet="trailer" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WEB_Anime_ASPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -252,13 +156,12 @@
           <Property Name="episode_count" Type="Int32" Nullable="false" />
           <Property Name="year" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="Anime_covers" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="studio" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rating" Type="Double" />
           <NavigationProperty Name="Anime_episode" Relationship="Self.fk_Anime_ep_Anime" FromRole="Anime" ToRole="Anime_episode" />
-          <NavigationProperty Name="characters" Relationship="Self.fk_character_Anime" FromRole="Anime" ToRole="character" />
-          <NavigationProperty Name="covers" Relationship="Self.fk_cover_Anime" FromRole="Anime" ToRole="cover" />
-          <NavigationProperty Name="trailers" Relationship="Self.fk_trailer_Anime" FromRole="Anime" ToRole="trailer" />
+          <NavigationProperty Name="trailers" Relationship="Self.FK_trailer_Anime" FromRole="Anime" ToRole="trailer" />
           <NavigationProperty Name="categories" Relationship="Self.Anime_category" FromRole="Anime" ToRole="category" />
-          <NavigationProperty Name="studios" Relationship="Self.Anime_studio" FromRole="Anime" ToRole="studio" />
         </EntityType>
         <EntityType Name="Anime_episode">
           <Key>
@@ -267,8 +170,8 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Anime_id_episode" Type="Int32" Nullable="false" />
           <Property Name="Anime_ep" Type="Int32" Nullable="false" />
+          <Property Name="Anime_ep_vid" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Anime" Relationship="Self.fk_Anime_ep_Anime" FromRole="Anime_episode" ToRole="Anime" />
-          <Property Name="Anime_ep_vid" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -278,40 +181,14 @@
           <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Animes" Relationship="Self.Anime_category" FromRole="category" ToRole="Anime" />
         </EntityType>
-        <EntityType Name="character">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Anime_id_character" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Anime" Relationship="Self.fk_character_Anime" FromRole="character" ToRole="Anime" />
-        </EntityType>
-        <EntityType Name="cover">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Anime_id_cover" Type="Int32" Nullable="false" />
-          <Property Name="covers" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Anime" Relationship="Self.fk_cover_Anime" FromRole="cover" ToRole="Anime" />
-        </EntityType>
-        <EntityType Name="studio">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Animes" Relationship="Self.Anime_studio" FromRole="studio" ToRole="Anime" />
-        </EntityType>
         <EntityType Name="trailer">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Anime_id_trailer" Type="Int32" Nullable="false" />
-          <Property Name="trailers" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Anime" Relationship="Self.fk_trailer_Anime" FromRole="trailer" ToRole="Anime" />
+          <Property Name="trailers" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Anime" Relationship="Self.FK_trailer_Anime" FromRole="trailer" ToRole="Anime" />
         </EntityType>
         <Association Name="fk_Anime_ep_Anime">
           <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
@@ -325,31 +202,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_character_Anime">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
-          <End Role="character" Type="Self.character" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Anime">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="character">
-              <PropertyRef Name="Anime_id_character" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_cover_Anime">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
-          <End Role="cover" Type="Self.cover" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Anime">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="cover">
-              <PropertyRef Name="Anime_id_cover" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_trailer_Anime">
+        <Association Name="FK_trailer_Anime">
           <End Role="Anime" Type="Self.Anime" Multiplicity="1" />
           <End Role="trailer" Type="Self.trailer" Multiplicity="*" />
           <ReferentialConstraint>
@@ -365,32 +218,17 @@
           <End Role="Anime" Type="Self.Anime" Multiplicity="*" />
           <End Role="category" Type="Self.category" Multiplicity="*" />
         </Association>
-        <Association Name="Anime_studio">
-          <End Role="Anime" Type="Self.Anime" Multiplicity="*" />
-          <End Role="studio" Type="Self.studio" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="WEB_Anime_ASPEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="WEB_Anime_ASPEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Account" />
           <EntitySet Name="Animes" EntityType="Self.Anime" />
           <EntitySet Name="Anime_episode" EntityType="Self.Anime_episode" />
           <EntitySet Name="categories" EntityType="Self.category" />
-          <EntitySet Name="characters" EntityType="Self.character" />
-          <EntitySet Name="covers" EntityType="Self.cover" />
-          <EntitySet Name="studios" EntityType="Self.studio" />
           <EntitySet Name="trailers" EntityType="Self.trailer" />
           <AssociationSet Name="fk_Anime_ep_Anime" Association="Self.fk_Anime_ep_Anime">
             <End Role="Anime" EntitySet="Animes" />
             <End Role="Anime_episode" EntitySet="Anime_episode" />
           </AssociationSet>
-          <AssociationSet Name="fk_character_Anime" Association="Self.fk_character_Anime">
-            <End Role="Anime" EntitySet="Animes" />
-            <End Role="character" EntitySet="characters" />
-          </AssociationSet>
-          <AssociationSet Name="fk_cover_Anime" Association="Self.fk_cover_Anime">
-            <End Role="Anime" EntitySet="Animes" />
-            <End Role="cover" EntitySet="covers" />
-          </AssociationSet>
-          <AssociationSet Name="fk_trailer_Anime" Association="Self.fk_trailer_Anime">
+          <AssociationSet Name="FK_trailer_Anime" Association="Self.FK_trailer_Anime">
             <End Role="Anime" EntitySet="Animes" />
             <End Role="trailer" EntitySet="trailers" />
           </AssociationSet>
@@ -398,17 +236,13 @@
             <End Role="Anime" EntitySet="Animes" />
             <End Role="category" EntitySet="categories" />
           </AssociationSet>
-          <AssociationSet Name="Anime_studio" Association="Self.Anime_studio">
-            <End Role="Anime" EntitySet="Animes" />
-            <End Role="studio" EntitySet="studios" />
-          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WEB_Anime_ASPModelStoreContainer" CdmEntityContainer="WEB_Anime_ASPEntities1">
+        <EntityContainerMapping StorageEntityContainer="WEB_Anime_ASPModelStoreContainer" CdmEntityContainer="WEB_Anime_ASPEntities">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="WEB_Anime_ASPModel.Account">
               <MappingFragment StoreEntitySet="Account">
@@ -428,6 +262,8 @@
                 <ScalarProperty Name="episode_count" ColumnName="episode_count" />
                 <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="Anime_covers" ColumnName="Anime_covers" />
+                <ScalarProperty Name="studio" ColumnName="studio" />
                 <ScalarProperty Name="rating" ColumnName="rating" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -435,42 +271,16 @@
           <EntitySetMapping Name="Anime_episode">
             <EntityTypeMapping TypeName="WEB_Anime_ASPModel.Anime_episode">
               <MappingFragment StoreEntitySet="Anime_episode">
-                <ScalarProperty Name="Anime_ep_vid" ColumnName="Anime_ep_vid" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Anime_id_episode" ColumnName="Anime_id_episode" />
                 <ScalarProperty Name="Anime_ep" ColumnName="Anime_ep" />
+                <ScalarProperty Name="Anime_ep_vid" ColumnName="Anime_ep_vid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="categories">
             <EntityTypeMapping TypeName="WEB_Anime_ASPModel.category">
               <MappingFragment StoreEntitySet="category">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="characters">
-            <EntityTypeMapping TypeName="WEB_Anime_ASPModel.character">
-              <MappingFragment StoreEntitySet="character">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Anime_id_character" ColumnName="Anime_id_character" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="covers">
-            <EntityTypeMapping TypeName="WEB_Anime_ASPModel.cover">
-              <MappingFragment StoreEntitySet="cover">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Anime_id_cover" ColumnName="Anime_id_cover" />
-                <ScalarProperty Name="covers" ColumnName="covers" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="studios">
-            <EntityTypeMapping TypeName="WEB_Anime_ASPModel.studio">
-              <MappingFragment StoreEntitySet="studio">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
@@ -491,14 +301,6 @@
             </EndProperty>
             <EndProperty Name="category">
               <ScalarProperty Name="id" ColumnName="category_id" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Anime_studio" TypeName="WEB_Anime_ASPModel.Anime_studio" StoreEntitySet="Anime_studio">
-            <EndProperty Name="Anime">
-              <ScalarProperty Name="id" ColumnName="Anime_id_studio" />
-            </EndProperty>
-            <EndProperty Name="studio">
-              <ScalarProperty Name="id" ColumnName="studio_id" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

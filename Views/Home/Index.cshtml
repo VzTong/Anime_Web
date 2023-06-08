@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Anime HomePage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    Anime_Web.Models.WEB_Anime_ASPEntities1 db = new Anime_Web.Models.WEB_Anime_ASPEntities1();
+    Anime_Web.Models.WEB_Anime_ASPEntities _db = new Anime_Web.Models.WEB_Anime_ASPEntities();
 }
 
 
@@ -87,34 +87,28 @@
 
                     <div class="row">
 
-                        @foreach (var item in db.Animes)
+                        @foreach (var item in _db.Animes)
                         {
-                            foreach (var item2 in db.Anime_episode)
+                            foreach (var item2 in _db.Anime_episode)
                             {
-                                foreach (var item3 in db.categories)
+                                foreach (var item3 in _db.categories)
                                 {
-
                                     <div class="col-lg-4 col-md-6 col-sm-6">
                                         <div class="product__item">
-                                            <div class="product__item__pic set-bg">
-                                                <a href="@Url.Action("Anime_details", "Products")">
-                                                    <img src="~/@item.covers" />
+                                            <div class="product__item__pic set-bg" style="position:relative">
+                                                <a href="@Url.Action("Anime_details", "Products", new { id= item.id })">
+                                                    <img src="~/@item.Anime_covers"/>
                                                 </a>
                                                 @if (item.episode_count != 0 && item2.Anime_ep != 0)
                                                 {
-
-                                                    <div class="ep">@item2.Anime_ep / @item.episode_count</div>
+                                                   <div class="ep">@item2.Anime_ep / @item.episode_count</div>
                                                 }
                                                 else
                                                 {
                                                     <div class="ep">Trailer / ??</div>
                                                 }
-
-                                                <div class="comment">
-                                                    <i class="fa fa-comments"></i> 11
-                                                </div>
-                                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                             </div>
+
                                             <div class="product__item__text">
                                                 <ul>
                                                     <li><a href="#" style="color: white">@item3.name</a></li>
@@ -137,10 +131,6 @@
                                         <img src="~/Content/img/trending/trend-1.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -162,10 +152,6 @@
                                         <img src="~/Content/img/trending/trend-2.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -185,10 +171,6 @@
                                         <img src="~/Content/img/trending/trend-3.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -208,10 +190,6 @@
                                         <img src="~/Content/img/trending/trend-4.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -231,10 +209,6 @@
                                         <img src="~/Content/img/trending/trend-5.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -254,10 +228,6 @@
                                         <img src="~/Content/img/trending/trend-6.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -297,10 +267,6 @@
                                         <img src="~/Content/img/popular/popular-1.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -343,10 +309,6 @@
                                         <img src="~/Content/img/popular/popular-3.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -366,10 +328,6 @@
                                         <img src="~/Content/img/popular/popular-4.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -389,10 +347,6 @@
                                         <img src="~/Content/img/popular/popular-5.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -412,10 +366,6 @@
                                         <img src="~/Content/img/popular/popular-6.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -453,10 +403,6 @@
                                         <img src="~/Content/img/recent/recent-1.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -476,10 +422,6 @@
                                         <img src="~/Content/img/recent/recent-2.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -499,10 +441,6 @@
                                         <img src="~/Content/img/recent/recent-3.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -522,10 +460,6 @@
                                         <img src="~/Content/img/recent/recent-4.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -545,10 +479,6 @@
                                         <img src="~/Content/img/recent/recent-5.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -568,10 +498,6 @@
                                         <img src="~/Content/img/recent/recent-6.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -609,10 +535,6 @@
                                         <img src="~/Content/img/live/live-1.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -632,10 +554,6 @@
                                         <img src="~/Content/img/live/live-2.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -655,10 +573,6 @@
                                         <img src="~/Content/img/live/live-3.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -678,10 +592,6 @@
                                         <img src="~/Content/img/live/live-4.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -701,10 +611,6 @@
                                         <img src="~/Content/img/live/live-5.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -724,10 +630,6 @@
                                         <img src="~/Content/img/live/live-6.jpg" />
                                     </a>
                                     <div class="ep">Trailer / ??</div>
-                                    <div class="comment">
-                                        <i class="fa fa-comments"></i> 11
-                                    </div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 </div>
                                 <div class="product__item__text">
                                     <ul>
@@ -743,6 +645,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6 col-sm-8">
                 <div class="product__sidebar">
                     <div class="product__sidebar__view">
@@ -755,17 +658,19 @@
                             <li data-filter=".month">Month</li>
                             <li data-filter=".years">Years</li>
                         </ul>
+
                         <div class="filter__gallery">
+
                             <div class="product__sidebar__view__item set-bg mix day years">
                                 <a href="@Url.Action("Anime_details", "Products")">
                                     <img src="~/Content/img/sidebar/tv-1.jpg" />
                                 </a>
                                 <div class="ep">Trailer / ??</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5>
                                     <a href="@Url.Action("Anime_details", "Products")">Boruto: Naruto next generations</a>
                                 </h5>
                             </div>
+
                             <div class="product__sidebar__view__item set-bg mix month week">
                                 <a href="@Url.Action("Anime_details", "Products")">
                                     <img src="~/Content/img/sidebar/tv-2.jpg" />
@@ -801,12 +706,12 @@
                                     <img src="~/Content/img/sidebar/tv-5.jpg" />
                                 </a>
                                 <div class="ep">Trailer / ??</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                 <h5>
                                     <a href="@Url.Action("Anime_details", "Products")">Fate stay night unlimited blade works</a>
                                 </h5>
                             </div>
                         </div>
+
                     </div>
                     <div class="product__sidebar__comment">
                         <div class="section-title">
@@ -826,7 +731,6 @@
                                 <h5>
                                     <a href="@Url.Action("Anime_details", "Products")">The Seven Deadly Sins: Wrath of the Gods</a>
                                 </h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                             </div>
                         </div>
                         <div class="product__sidebar__comment__item">
@@ -843,7 +747,6 @@
                                 <h5>
                                     <a href="@Url.Action("Anime_details", "Products")">Shirogane Tamashii hen Kouhan sen</a>
                                 </h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                             </div>
                         </div>
                         <div class="product__sidebar__comment__item">
@@ -860,7 +763,6 @@
                                 <h5>
                                     <a href="@Url.Action("Anime_details", "Products")">Kizumonogatari III: Reiket su-hen</a>
                                 </h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
                             </div>
                         </div>
                         <div class="product__sidebar__comment__item">

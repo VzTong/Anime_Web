@@ -11,7 +11,7 @@ namespace Anime_Web.Controllers
    
     public class ProductsController : Controller
     {
-        WEB_Anime_ASPEntities1 _db =new WEB_Anime_ASPEntities1();
+        WEB_Anime_ASPEntities _db =new WEB_Anime_ASPEntities();
         // GET: Products
         public ActionResult Categories()
         {

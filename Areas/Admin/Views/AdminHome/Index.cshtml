@@ -1,19 +1,41 @@
-﻿
+﻿@model IEnumerable<Anime_Web.Models.Anime>
+
 @{
     ViewBag.Title = "Admin Page";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Anime_Web.Models.WEB_Anime_ASPEntities db = new Anime_Web.Models.WEB_Anime_ASPEntities();
+
 }
+
 
 <!-- Product Section Begin -->
 <section class="hero">
     <div class="container">
         <div style="display:flex">
             <div class="header p-3" style="width:25%">
-                <aside>
+                <aside id="tab_list">
                     <ul class="list-group mt-4">
                         <li class="list-group-item my-1 item-active text-center">
-                            <a href="#">
-                                Manage Anime (danh sach)
+                            <a href="@Url.Action("index", "AdminHome")">
+                                Manage Anime
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="@Url.Action("CreateCategoty", "AdminProducts")">
+                                Manage Anime Category
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="@Url.Action("AnimeEpisode", "AdminProducts")">
+                                Manage Anime Episode
+                            </a>
+                        </li>
+
+                        <li class="list-group-item my-1 text-center">
+                            <a href="@Url.Action("AnimeTrailers", "AdminProducts")">
+                                Manage Anime Trailers
                             </a>
                         </li>
                     </ul>
@@ -22,16 +44,16 @@
             </div>
 
 
-            <div style="width:85%">
+            <div style="width:85%" class="ml-3">
 
-                <div style="float:right; padding: 5px 10px">
-                    <a class="btn btn-success" href="@Url.Action("Create", "AdminProducts")s"> Add Movie</a>
+                <div>
+                    <a class="btn btn-success" href="@Url.Action("Create", "AdminProducts")"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Anime</a>
                 </div>
 
-                <div class="product__sidebar mt-5">
+                <div class="product__sidebar mt-4">
                     <div class="product__sidebar__view">
                         <div class="section-title">
-                            <h5>List Categories Anime</h5>
+                            <h5>List Anime</h5>
                         </div>
 
                         <ul class="filter__controls">
@@ -40,15 +62,67 @@
                             </li>
                             <li data-filter=".trending">Trending</li>
                             <li data-filter=".adventure">Adventure</li>
-                            <li data-filter=".month">Month</li>
-                            <li data-filter=".years">Years</li>
+                            <li data-filter=".action ">Action </li>
+                            <li data-filter=".detective">Detective</li>
+                            <li data-filter=".sport">Sport</li>
+                            <li data-filter=".emotional">Emotional</li>
                         </ul>
 
                         <div class="filter__gallery">
 
 
+                            @foreach (var item in db.Animes.OrderByDescending(x => x.id))
+                            {
+                                foreach (var item1 in db.categories)
+                                {
+
+                                    <div class="anime__details__content mix detective" style="width:100%">
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class="anime__details__pic set-bg"
+                                                     data-setbg="@item.Anime_covers" style="height:350px">
+                                                    <img src="item.Anime_covers" style="height:350px"/>
+                                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="anime__details__text">
+                                                    <div class="anime__details__title">
+                                                        <h3>@item.name</h3>
+
+                                                    </div>
+                                                    <p>
+                                                        @item.description
+                                                    </p>
+                                                    <div class="anime__details__widget">
+
+                                                        <ul>
+                                                            <li><span>Studios:</span> @item.studio</li>
+                                                            <li>
+                                                                <span>Genre:</span> @item1.name
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+
+                                                    <div class="anime__details__btn">
+                                                        <a href="#" class="btn btn-secondary" style="margin-right:10px"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT</a>
+
+                                                        <a href="#" class="btn btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i> DELETE</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                            }
+                            }
+
                             @* item 1 *@
-                            <div class="anime__details__content mix years" style="width:100%">
+                            <div class="anime__details__content mix Detective" style="width:100%">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="anime__details__pic set-bg"
@@ -84,9 +158,9 @@
                                             </div>
 
                                             <div class="anime__details__btn">
-                                                <a href="#" class="btn btn-secondary" style="margin-right:10px"> EDIT</a>
+                                                <a href="#" class="btn btn-secondary" style="margin-right:10px"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT</a>
 
-                                                <a href="#" class="btn btn-danger">DELETE</a>
+                                                <a href="#" class="btn btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i> DELETE</a>
                                             </div>
 
                                         </div>
@@ -97,7 +171,7 @@
 
                             @* item 2 *@
 
-                            <div class="anime__details__content mix month" style="width:100%">
+                            <div class="anime__details__content mix action " style="width:100%">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="anime__details__pic set-bg"
@@ -133,9 +207,9 @@
                                             </div>
 
                                             <div class="anime__details__btn">
-                                                <a href="#" class="btn btn-secondary" style="margin-right:10px"> EDIT</a>
+                                                <a href="#" class="btn btn-secondary" style="margin-right:10px"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> EDIT</a>
 
-                                                <a href="#" class="btn btn-danger">DELETE</a>
+                                                <a href="#" class="btn btn-danger"><i class="fa fa-minus-square" aria-hidden="true"></i> DELETE</a>
                                             </div>
 
                                         </div>

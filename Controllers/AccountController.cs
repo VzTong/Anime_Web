@@ -11,7 +11,7 @@ namespace Anime_Web.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly WEB_Anime_ASPEntities1 _db = new WEB_Anime_ASPEntities1();
+        private readonly WEB_Anime_ASPEntities _db = new WEB_Anime_ASPEntities();
 
         [HttpGet]
         public ActionResult Register()
@@ -95,18 +95,20 @@ namespace Anime_Web.Controllers
                 {
                     Session["username"] = data1.FirstOrDefault().username;
                     Session["id"] = data1.FirstOrDefault().id;
+                    Session["ischeck"] = data1.FirstOrDefault().ischeck;
 
                     ViewBag.Message = data1.FirstOrDefault().username + " Successfully registerd.";
                     return RedirectToAction("Index", "Home");
                 }
-                //else if ((data2.Count() != 0))
-                //{
-                //    Session["username"] = data2.FirstOrDefault().email;
-                //    Session["id"] = data2.FirstOrDefault().id;
+                else if ((data2.Count() != 0))
+                {
+                    Session["username"] = data2.FirstOrDefault().username;
+                    Session["id"] = data2.FirstOrDefault().id;
+                    Session["ischeck"] = data2.FirstOrDefault().ischeck;
 
-                //    ViewBag.Message = data2.FirstOrDefault().username + " Successfully registerd.";
-                //    return RedirectToAction("Index", "Home");
-                //}
+                    ViewBag.Message = data2.FirstOrDefault().username + " Successfully registerd.";
+                    return RedirectToAction("Index", "Home");
+                }
                 else
                 {
                     ViewBag.mess_err = "tài khoản hoặc mật khẩu không chính xác";

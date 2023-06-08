@@ -18,11 +18,8 @@ namespace Anime_Web.Models
         public Anime()
         {
             this.Anime_episode = new HashSet<Anime_episode>();
-            this.characters = new HashSet<character>();
-            this.covers = new HashSet<cover>();
             this.trailers = new HashSet<trailer>();
             this.categories = new HashSet<category>();
-            this.studios = new HashSet<studio>();
         }
     
         public int id { get; set; }
@@ -30,19 +27,15 @@ namespace Anime_Web.Models
         public int episode_count { get; set; }
         public System.DateTime year { get; set; }
         public string description { get; set; }
-        public double rating { get; set; }
+        public string Anime_covers { get; set; }
+        public string studio { get; set; }
+        public Nullable<double> rating { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anime_episode> Anime_episode { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<character> characters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cover> covers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<trailer> trailers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<category> categories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<studio> studios { get; set; }
     }
 }
