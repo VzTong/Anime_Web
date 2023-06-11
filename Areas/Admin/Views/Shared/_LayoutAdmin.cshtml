@@ -87,7 +87,7 @@
                                     </div>
                                 </li>
                                 <li>
-                                    @if (Session["AdminName"] == null || Session["AdminName"] == " ")
+                                    @if (Session["AdminName"] == null || Session["AdminName"] == "")
                                     {
                                         <div class="header__right col-lg-2">
                                             <a href="@Url.Action("AdminLogin", "AdminAccount" )">
@@ -97,10 +97,6 @@
 
                                                 <li>
                                                     <a href="@Url.Action("AdminLogin", "AdminAccount" )">Log In</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="@Url.Action("AdminRegister", "AdminAccount" )">Register</a>
                                                 </li>
 
                                             </ul>

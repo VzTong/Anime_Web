@@ -28,7 +28,7 @@ namespace Anime_Web.Models
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<Anime> Animes { get; set; }
         public virtual DbSet<Anime_episode> Anime_episode { get; set; }
-        public virtual DbSet<category> categories { get; set; }
+        public virtual DbSet<Categogy> Categogies { get; set; }
         public virtual DbSet<trailer> trailers { get; set; }
     }
 }

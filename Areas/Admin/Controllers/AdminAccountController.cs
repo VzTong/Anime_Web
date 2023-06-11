@@ -14,60 +14,6 @@ namespace Anime_Web.Areas.Admin.Controllers
         // GET: Admin/AdminAccount
         public readonly WEB_Anime_ASPEntities _db = new WEB_Anime_ASPEntities();
 
-        [HttpGet]
-        public ActionResult AdminRegister()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult AdminRegister(AccountM _Admin)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    // check user_name 
-                    var check = _db.Accounts.FirstOrDefault(s => s.username == _Admin.username);
-
-                    if (check == null)
-                    {
-                        _Admin.password = GetMD5(_Admin.password);
-                        _db.Configuration.ValidateOnSaveEnabled = false;
-
-                        var account = new Account
-                        {
-                            email = _Admin.email,
-                            username = _Admin.username,
-                            password = _Admin.password,
-                            ischeck = 1
-                        };
-                        _db.Accounts.Add(account);
-                        _db.SaveChanges();
-
-                        ModelState.Clear();
-                        ViewBag.Message = account.username + " Successfully registerd.";
-                        return RedirectToAction("AdminLogin", "AdminAccount");
-                    }
-                    else
-                    {
-                        ViewBag.error = "AdminName already exists";
-                        return View();
-                    }
-                }
-                else
-                {
-                    return View();
-                }
-            }
-
-            catch (Exception)
-            {
-                Console.WriteLine("Something went wrong.");
-            }
-            return View();
-
-        }
 
         //-------------------------------//
 
@@ -126,7 +72,7 @@ namespace Anime_Web.Areas.Admin.Controllers
         public ActionResult AdminLogout()
         {
             Session.Clear();//remove session
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AdminLogin");
         }
 
         //create a string MD5

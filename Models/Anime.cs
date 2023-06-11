@@ -18,8 +18,8 @@ namespace Anime_Web.Models
         public Anime()
         {
             this.Anime_episode = new HashSet<Anime_episode>();
+            this.Categogies = new HashSet<Categogy>();
             this.trailers = new HashSet<trailer>();
-            this.categories = new HashSet<category>();
         }
     
         public int id { get; set; }
@@ -34,8 +34,8 @@ namespace Anime_Web.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anime_episode> Anime_episode { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<trailer> trailers { get; set; }
+        public virtual ICollection<Categogy> Categogies { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<category> categories { get; set; }
+        public virtual ICollection<trailer> trailers { get; set; }
     }
 }

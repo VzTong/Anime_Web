@@ -45,82 +45,57 @@ namespace Anime_Web.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            try
-            {
-                // Lấy danh sách các studio từ database để hiển thị trên form
-                //var studios = _db.studios.ToList();
-                //ViewBag.Studios = new SelectList(studios, "id", "name");
-
-                // Lấy danh sách các thể loại từ database để hiển thị trên form
-                var categories = _db.categories.ToList();
-                ViewBag.Categories = new MultiSelectList(categories, "id", "name");
-
-                return View();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw ex;
-            }
+            return View();
         }
-
 
         [AdminAuthorize]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Anime _Anime, HttpPostedFileBase Img, List<int> categories, int studio)
+        //[ValidateAntiFo?rgeryToken]
+        public ActionResult Create(Anime _anime, HttpPostedFileBase covers, FormCollection _form)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+           
                     // Lưu ảnh cover vào database
-                    saveImg(_Anime, Img);
+                    saveImg(_anime, covers);
 
-                    // Lưu thông tin của Anime vào database
-                    _Anime.categories = new List<category>();
+                    Categogy listCate = new Categogy();
+                    string id = Session["id"].ToString() ;
 
+                    List<Categogy> _list = new List<Categogy>();
                     // Lấy danh sách các categories từ database và ánh xạ các categories được chọn vào list của Anime
-
-                    foreach (var category_id in _db.categories)
-                    {
-                        var category = _db.categories.Find(category_id);
-
-                        if (category == null)
+                
+                    
+                        foreach(var item in _form["check"])
                         {
-                            Console.WriteLine("Không tìm thấy thông tin category với id = " + category_id);
+                            listCate.name = item.ToString();
+                            listCate.Anime_id_category = int.Parse(id);
+                            _db.Categogies.Add(listCate);
+                            _db.SaveChanges();
                         }
-                        else
-                        {
-                            _Anime.categories.Add(category);
-                        }
-                    }
-
-                    // Lấy thông tin studio từ database và ánh xạ vào studio của Anime
-                    //var studio_object = _db.studios.Find(studio);
-                    //_Anime.studios = (ICollection<studio>)studio_object;
+                    
+  
 
                     // Lưu Anime vào database
-                    _db.Animes.Add(_Anime);
+                    _db.Animes.Add(_anime);
                     _db.SaveChanges();
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("/");
                 }
                 catch (Exception ex)
                 {
-                    ModelState.AddModelError("", "Lỗi khi lưu Anime và ảnh cover vào database: " + ex.Message);
+                    //ModelState.AddModelError("", "Lỗi khi lưu Anime và ảnh cover vào database: " + ex.Message);
+                    return RedirectToAction("Create");
                 }
             }
 
-            // Lấy danh sách các studio từ database để hiển thị trên form
-            //List<studio> _studios = _db.studios.ToList();
-            //ViewBag.Studios = new SelectList(_studios, "id", "name");
-
             // Lấy danh sách các thể loại từ database để hiển thị trên form
-            List<category> _categories = _db.categories.ToList();
-            ViewBag.Categories = new MultiSelectList(_db.categories.ToList(), "id", "name");
+            List<Categogy> _categories = _db.Categogies.ToList();
+            ViewBag.Categories = new MultiSelectList(_db.Categogies.ToList(), "id", "name");
 
-            return View(_Anime);
+            return View("index");
 
         }
 
@@ -133,63 +108,6 @@ namespace Anime_Web.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
-
-
-        //    [AdminAuthorize]
-        //[HttpPost]
-        //public ActionResult Create(Anime _Anime, HttpPostedFileBase Image)
-        //{
-        //    bool isUploaded = false;
-        //    string filePath = string.Empty;
-        //    try
-        //    {
-
-        //        _db.Configuration.ValidateOnSaveEnabled = false;
-
-        //        Anime anime = new Anime();
-        //        anime.name = _Anime.name;
-        //        anime.episode_count = _Anime.episode_count;
-        //        anime.year = _Anime.year;
-        //        anime.description = _Anime.description;
-        //        anime.rating = _Anime.rating;
-        //        anime.Anime_episode = _Anime.Anime_episode;
-        //        anime.characters = _Anime.characters;
-
-        //        //covers = _Anime.covers
-        //        //trailers = _Anime.trailers
-        //        //categories = _Anime.categories
-        //        //studios = _Anime.studios
-
-
-        //        _db.Animes.Add(anime);
-        //        _db.SaveChanges();
-
-        //        ModelState.Clear();
-
-        //        foreach (string fileName in Request.Files)
-        //        {
-        //            HttpPostedFileBase file = Request.Files[fileName];
-        //            if (file != null)
-        //            {
-        //                string path = Server.MapPath("~/Content/Upload/");  // Khai báo đường dẫn thư mục Upload trên máy chủ
-        //                string extension = Path.GetExtension(file.FileName);    // Lấy phần mở rộng của tệp được tải lên trong yêu cầu
-        //                string fileNameOnly = Path.GetFileNameWithoutExtension(file.FileName);  //Lấy tên tệp được tải lên (không bao gồm phần mở rộng)
-        //                string newFileName = Guid.NewGuid().ToString(); //Tạo một tên mới cho tệp bằng cách sử dụng GUID
-        //                string fullPath = path + newFileName + extension;   //Tạo đường dẫn đầy đủ cho tệp mới
-        //                file.SaveAs(fullPath);  // Lưu tệp được tải lên tại đường dẫn đầy đủ với tên mới
-        //                //filePath = fullPath;    // Lưu đường dẫn đầy đủ của tệp đã được tải lên để có thể sử dụng sau này
-        //            }
-        //        }
-        //         isUploaded = true;  // Cập nhật biến `isUploaded` thành `true` để cho biết tệp đã được tải lên thành công
-
-        //        return RedirectToAction("Index", "AdminHome");
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return RedirectToAction("Create", "AdminProducts", new { success = false, message = "kiểm tra lại lại thông tin"});
-        //    }
-        //}
 
 
     }

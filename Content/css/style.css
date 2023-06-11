@@ -630,7 +630,7 @@ ol {
 }
 
 .product__item__pic {
-    height: 325px;
+    height: 327px;
     position: relative;
     border-radius: 5px;
 }
@@ -672,7 +672,7 @@ ol {
     }
 
 .product__item__text {
-    padding-top: 20px;
+    padding-top: 7px;
 }
 
     .product__item__text ul {
@@ -778,7 +778,7 @@ ol {
     .product__sidebar__view__item h5 {
         position: absolute;
         left: 0;
-        bottom: 25px;
+        bottom: 40px;
         width: 100%;
         padding: 0 30px 0 20px;
     }
@@ -1936,9 +1936,6 @@ aside ul li:hover, .item-active {
     align-items: start;
 }
 
-.box {
-    padding: 2em;
-}
 
 .item {
     margin-bottom: 2em;

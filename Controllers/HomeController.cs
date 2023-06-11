@@ -13,8 +13,8 @@ namespace Anime_Web.Controllers
 
         public ActionResult Index()
         {
-            //var list = _db.Animes.ToList();
-            return View();
+            List<Anime> _anime = _db.Animes.OrderBy(m => m.id).ToList();
+            return View(_anime);
         }
         public ActionResult Blog()
         {

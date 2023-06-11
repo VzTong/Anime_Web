@@ -16,11 +16,15 @@
                         @using (Html.BeginForm("AdminLogin", "AdminAccount", FormMethod.Post))
                         {
 
-                            <span class="text-danger">@ViewBag.mess_err</span>
+                            <div class="text-danger">
+                                <span>
+                                    @ViewBag.mess_err
+                                </span>
+                            </div>
 
 
                             <div class="input__item">
-                                <input type="text" name="AdminName" placeholder="Your Name" />
+                                <input type="text" name="AdminName" placeholder="Your Name or Your Email" />
                                 <span class="icon_profile"></span>
                             </div>
 
